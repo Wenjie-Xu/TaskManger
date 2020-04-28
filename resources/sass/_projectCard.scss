@@ -1,0 +1,27 @@
+.ccd{
+	.icon-bar{
+		width:100%;
+		background-color:#dff0d8;
+		opacity:0.7;
+		list-style:none;
+		z-index:100;
+		position:absolute;
+		top:0;
+
+		li{
+		float:right;
+		margin-right:.7em;
+		
+		.btn{
+			background: transparent;
+			border:none;
+			border-radius: 0;
+			padding: 0;
+		}
+
+		.fa-btn{
+			color:#d9534f;
+			}
+		}
+	}
+}
