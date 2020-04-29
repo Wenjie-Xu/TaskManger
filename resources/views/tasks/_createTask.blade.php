@@ -1,0 +1,17 @@
+<div class="col-auto">
+
+{!! Form::open(['route'=>'tasks.store','method'=>'POST']) !!}
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+            <i class="fa fa-plus"></i>
+        </div>
+      </div>
+    {!! Form::text('name', null, ['class'=>'form-control','placeholder'=>'请填写一个任务']) !!}
+    {!! Form::hidden('project_id', $project->id) !!}
+    
+    </div>
+
+{!! Form::close() !!}
+
+</div>

@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="continer">
-        <h1>Hello</h1>
+        @include('tasks._createTask')
     </div>
 @endsection
