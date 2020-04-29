@@ -32,7 +32,8 @@
 	</div>
 </div>
 @else
-	<div>当前用户无项目~</div>
+	<div><h3>当前用户无项目,点击创建一个</h3></div>
+	@include('projects._createProjectModal')
 @endif
 
 @endsection
