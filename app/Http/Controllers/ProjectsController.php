@@ -58,8 +58,8 @@ class ProjectsController extends Controller
     }
 
 	public function show($id){
-		$this->proj->findProject($id);
-		return view('projects.show');
+		$project = $this->proj->findProject($id);
+		return view('projects.show',compact('project'));//将项目传递给任务页面
 	}
 
 
