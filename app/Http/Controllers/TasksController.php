@@ -37,7 +37,7 @@ class TasksController extends Controller
     {
         Task::create([
             'name'=>$request->name,
-            'completion'=>$request->completion,
+            'completion'=>(int) false,//默认未完成
             'project_id'=>$request->project_id
         ]);
     }
