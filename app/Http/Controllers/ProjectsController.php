@@ -59,7 +59,9 @@ class ProjectsController extends Controller
 
 	public function show($id){
 		$project = $this->proj->findProject($id);
-		return view('projects.show',compact('project'));//将项目传递给任务页面
+		$todos = $this->proj->todos($project);
+		$dones = $this->proj->dones($project);
+		return view('projects.show',compact('project','todos','dones'));//将项目传递给任务页面
 	}
 
 
