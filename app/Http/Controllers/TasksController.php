@@ -55,6 +55,13 @@ class TasksController extends Controller
         //
     }
 
+    public function check($id){
+        $task = Task::findOrFail($id);
+        $task->completion = (int) true;
+        $task->save();
+        return redirect()->back();
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
