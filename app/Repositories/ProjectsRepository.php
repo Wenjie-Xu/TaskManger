@@ -70,5 +70,15 @@ class ProjectsRepository
 			return null;
 		}
 	}
+
+	public function todos($project){
+		$todos = $project->tasks()->where('completion',0)->get();
+		return $todos;
+	}
+
+	public function dones($project){
+		$dones = $project->tasks()->where('completion',1)->get();
+		return $dones;
+	}
 }
 ?>
