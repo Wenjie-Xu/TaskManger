@@ -48,6 +48,6 @@ Route::resource('tasks', 'TasksController');
 
 
 //定义task完成状态的路由
-Route::post('/tasks/check/{task}','TasksController@check')->name('tasks.check');
+Route::post('/tasks/check/{id}','TasksController@check')->name('tasks.check');
 
 
