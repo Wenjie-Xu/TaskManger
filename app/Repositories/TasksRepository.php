@@ -23,5 +23,13 @@ class TasksRepository
 		$task->completion = (int) true;
         return $task->save();
 	}
+
+	public function update($request, $task){
+		$task=$this->find($task);
+		return $task->update([
+			'name'=>$request->name,
+			'project_id'=>$request->project
+		]);
+	}
 }
 ?>

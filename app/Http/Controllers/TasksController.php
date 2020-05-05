@@ -81,9 +81,10 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $task)
     {
-        //
+        $this->repo->update($request, $task);
+        return back();
     }
 
     /**

@@ -61,7 +61,9 @@ class ProjectsController extends Controller
 		$project = $this->proj->findProject($id);
 		$todos = $this->proj->todos($project);
 		$dones = $this->proj->dones($project);
-		return view('projects.show',compact('project','todos','dones'));//将项目传递给任务页面
+		//该方法能够生成id=>name的数组
+		$projects = auth()->user()->projects()->pluck('name','id');
+		return view('projects.show',compact('project','todos','dones','projects'));//将项目传递给任务页面
 	}
 
 
