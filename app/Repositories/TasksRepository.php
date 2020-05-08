@@ -13,6 +13,11 @@ class TasksRepository
 	        ]);
 	}
 
+	public function delete($id){
+		$task = $this->find($id);
+		return $task->delete();
+	}
+
 	public function find($id){
 		$task = Task::findOrFail($id);
 		return $task;
@@ -31,5 +36,6 @@ class TasksRepository
 			'project_id'=>$request->project
 		]);
 	}
+
 }
 ?>

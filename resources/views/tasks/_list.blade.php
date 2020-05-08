@@ -15,6 +15,7 @@
             <td>{{ $todo->name }}</td>
             <td>@include('tasks._checkForm')</td>
             <td>@include('tasks._editModal')</td>
+            <td>@include('tasks._deleteTask')</td>
           </tr>
         @endforeach
       </table>
@@ -27,6 +28,7 @@
         @foreach($dones as $done)
           <tr>
             <td>{{ $done->name }}</td>
+            <td>@include('tasks._deleteDone')</td>
           </tr>
         @endforeach
       </table>
