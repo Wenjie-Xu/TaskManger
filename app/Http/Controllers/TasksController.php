@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Task;
 use Illuminate\Http\Request;
 use App\Repositories\TasksRepository;
+use App\Http\Requests\CreateTask;
 
 class TasksController extends Controller
 {
@@ -41,7 +42,7 @@ class TasksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateTask $request)
     {
         $this->repo->create($request);
         return redirect()->back();
