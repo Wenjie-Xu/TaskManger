@@ -6,6 +6,7 @@ use App\Task;
 use Illuminate\Http\Request;
 use App\Repositories\TasksRepository;
 use App\Http\Requests\CreateTask;
+use App\Http\Requests\UpdateTask;
 
 class TasksController extends Controller
 {
@@ -82,7 +83,7 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $task)
+    public function update(UpdateTask $request, $task)
     {
         $this->repo->update($request, $task);
         return back();

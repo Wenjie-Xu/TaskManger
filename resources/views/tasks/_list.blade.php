@@ -8,18 +8,21 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="todo" role="tabpanel" aria-labelledby="todo-tab">
+    <table class="table table-striped">
+      <tr>
+        @include('tasks._createTask')
+      </tr>
     @if(count($todos))
-      <table class="table table-striped">
         @foreach($todos as $todo)
           <tr>
-            <td>{{ $todo->name }}</td>
-            <td>@include('tasks._checkForm')</td>
-            <td>@include('tasks._editModal')</td>
-            <td>@include('tasks._deleteTask')</td>
+            <td class="col-9 pl-5">{{ $todo->name }}</td>
+            <td class="col-1">@include('tasks._checkForm')</td>
+            <td class="col-1">@include('tasks._editModal')</td>
+            <td class="col-1">@include('tasks._deleteTask')</td>
           </tr>
         @endforeach
-      </table>
     @endif
+    </table>
   </div>
 
   <div class="tab-pane fade" id="done" role="tabpanel" aria-labelledby="done-tab">

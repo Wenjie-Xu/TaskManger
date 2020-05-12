@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateTask extends FormRequest
 {
@@ -28,7 +29,21 @@ class CreateTask extends FormRequest
     {
         return [
             'name'=>'required|max:255',//数据库验证前一步验证
-            'project_id'=>'required|integer|exists:projects,id'
+            'project_id'=>['required',
+            'integer',
+            Rule::exists('projects','id')->whereIn('id',$this->user()
+            ->projects()->pluck('id')->toArray())
+            ]
+        ];
+    }
+
+    public function messages(){
+        return [
+            'name.required'=>'任务名称必填',
+            'name.max'=>'名称长度字符限制为：255',
+            'project_id.required'=>'没有提交当前任务所属的项目ID',
+            'project_id.integer'=>'所提交的项目ID无效（非整数）',
+            'project_id.exists'=>'所提交的项目ID无效（不存在该项目）'
         ];
     }
 }

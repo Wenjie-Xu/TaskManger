@@ -18,10 +18,16 @@
           <div class="form-group">
             {!! Form::label('name','任务名称')!!}
             {!! Form::text('name',null,['class'=>'form-control'])!!}
+            {!! $errors->getBag('update-'.$todo->id)->first('name','<div class="alert alert-danger">
+              :message
+              </div>') !!}
           </div>
           <div class="form-group">
             {!! Form::label('project','所属项目')!!}
             {!! Form::select('project',$projects,$project->id,['class'=>'form-control']) !!}
+            {!! $errors->getBag('update-'.$todo->id)->first('project','<div class="alert alert-danger">
+              :message
+              </div>') !!}
           </div>
         </div>
         <div class="modal-footer">
