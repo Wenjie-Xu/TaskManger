@@ -33,8 +33,16 @@ class TasksRepository
 		$task=$this->find($task);
 		return $task->update([
 			'name'=>$request->name,
-			'project_id'=>$request->project
+			'project_id'=>$request->project_id
 		]);
+	}
+
+	public function todos(){
+		return auth()->user()->tasks()->where('completion',0)->paginate(2);//获取分页后的全部数据
+	}
+
+	public function dones(){
+		return auth()->user()->tasks()->where('completion',1)->paginate(2);
 	}
 
 }

@@ -14,6 +14,7 @@ class TasksController extends Controller
 
     public function __construct(TasksRepository $repo){
         $this->repo=$repo;
+        $this->middleware('auth');//没有登陆则没法访问这些方法
     }
 
 
@@ -24,7 +25,11 @@ class TasksController extends Controller
      */
     public function index()
     {
-        //
+		$todos = $this->repo->todos();
+		$dones = $this->repo->dones();
+		//该方法能够生成id=>name的数组
+		$projects = auth()->user()->projects()->pluck('name','id');
+		return view('tasks.index',compact('todos','dones','projects'));//将项目传递给任务页面
     }
 
     /**

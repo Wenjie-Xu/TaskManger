@@ -27,7 +27,7 @@ class UpdateTask extends FormRequest
     {
         return [
             'name'=>'required|max:255',//数据库验证前一步验证
-            'project'=>['required',
+            'project_id'=>['required',
                     'integer',
                     Rule::exists('projects','id')->where(function($query){
                         return $query->whereIn('id',$this->user()->projects()->pluck('id'));
@@ -40,9 +40,9 @@ class UpdateTask extends FormRequest
         return [
             'name.required'=>'任务名称必填',
             'name.max'=>'名称长度字符限制为：255',
-            'project.required'=>'没有提交当前任务所属的项目ID',
-            'project.integer'=>'所提交的项目ID无效（非整数）',
-            'project.exists'=>'所提交的项目ID无效（当前用户无该项目）'
+            'project_id.required'=>'没有提交当前任务所属的项目ID',
+            'project_id.integer'=>'所提交的项目ID无效（非整数）',
+            'project_id.exists'=>'所提交的项目ID无效（当前用户无该项目）'
         ];
     }
 
