@@ -18,10 +18,11 @@ class CreateTasksTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('completion');
-            $table->integer('project_id')->unsigned();//全部设置为正整数
+            $table->bigInteger('project_id')->unsigned();//全部设置为正整数
             $table->timestamps();
         
-            //$table->foreign('project_id')->references('id')->on('projects');//一个项目删除后，对应的任务也会删除
+            $table->foreign('project_id')->references('id')
+                    ->on('projects')->onDelete('cascade');//一个项目删除后，对应的任务也会删除
         });
     }
 

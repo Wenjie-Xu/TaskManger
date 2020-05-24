@@ -16,4 +16,8 @@ class Project extends Model
 	public function tasks(){
 		return $this->hasMany('App\Task');
 	}
+
+	public function getThumbnailAttribute($value){
+		return $value ?:'project.jpeg';//数据库中存在取数据库，否则取project
+	}
 }
