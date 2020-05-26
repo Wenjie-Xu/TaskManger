@@ -82,4 +82,10 @@
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('customJS')
 </body>
+{{-- 页脚的样式 --}}
+<footer class="footer">
+    <div class="container">
+      <div>当前共有{{ $total }}个任务，{{ $todoCount }}个待完成，{{ $doneCount }}个已完成</div>
+    </div>
+</footer>
 </html>
