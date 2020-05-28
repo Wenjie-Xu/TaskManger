@@ -45,5 +45,17 @@ class TasksRepository
 		return auth()->user()->tasks()->where('completion',1)->paginate(2);
 	}
 
+	public function totalCount(){
+		return auth()->user()->tasks()->count();
+	}
+
+	public function todoCount(){
+		return auth()->user()->tasks()->where('completion',0)->count();
+	}
+
+	public function doneCount(){
+		return auth()->user()->tasks()->where('completion',1)->count();
+	}
+
 }
 ?>

@@ -37,13 +37,13 @@ class CreateTask extends FormRequest
         ];
     }
 
-    public function messages(){
-        return [
-            'name.required'=>'任务名称必填',
-            'name.max'=>'名称长度字符限制为：255',
-            'project_id.required'=>'没有提交当前任务所属的项目ID',
-            'project_id.integer'=>'所提交的项目ID无效（非整数）',
-            'project_id.exists'=>'所提交的项目ID无效（不存在该项目）'
-        ];
-    }
+    // public function messages(){
+    //     return [
+    //         'name.required'=>'任务名称必填',
+    //         'name.max'=>'名称长度字符限制为：255',
+    //         'project_id.required'=>'没有提交当前任务所属的项目ID',
+    //         'project_id.integer'=>'所提交的项目ID无效（非整数）',
+    //         'project_id.exists'=>'所提交的项目ID无效（不存在该项目）'
+    //     ];
+    // }
 }

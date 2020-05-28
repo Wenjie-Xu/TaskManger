@@ -85,7 +85,9 @@
 {{-- 页脚的样式 --}}
 <footer class="footer">
     <div class="container">
-      <div>当前共有{{ $total }}个任务，{{ $todoCount }}个待完成，{{ $doneCount }}个已完成</div>
+        @auth
+            当前共有{{ $totalCount }}个任务，{{ $todoCount }}个待完成，{{ $doneCount }}个已完成
+        @endauth
     </div>
 </footer>
 </html>

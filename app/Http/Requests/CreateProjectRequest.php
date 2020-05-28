@@ -40,15 +40,15 @@ class CreateProjectRequest extends FormRequest
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'name.required'=>'项目名称不能空',
-            'name.unique'=>'项目名称重复',
-            'thumbnail.image'=>'上传的文件不是图片',
-            'thumbnail.dimensions'=>'图片大小不符合规范',
-            'thumbnail.max'=>'图片最大为2M'
-        ];
-    }
+    // public function messages()
+    // {
+    //     return [
+    //         'name.required'=>'项目名称不能空',
+    //         'name.unique'=>'项目名称重复',
+    //         'thumbnail.image'=>'上传的文件不是图片',
+    //         'thumbnail.dimensions'=>'图片大小不符合规范',
+    //         'thumbnail.max'=>'图片最大为2M'
+    //     ];
+    // }
 
 }
