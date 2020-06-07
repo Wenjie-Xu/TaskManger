@@ -46,8 +46,10 @@ Route::get('/projects/{project}','ProjectsController@show')->name('projects.show
 
 Route::resource('tasks', 'TasksController');
 
-
 //定义task完成状态的路由
 Route::post('/tasks/check/{id}','TasksController@check')->name('tasks.check');
 
+//从属关系的路由结构
+//资源路由这样的写法将获得:tasks/1/steps/1，这样的路由结构
+Route::resource('tasks.steps', 'StepsController');
 
