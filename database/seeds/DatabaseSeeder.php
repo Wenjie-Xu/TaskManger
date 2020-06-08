@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        //声明自定义的seeder，这样就可以找得到
+        $this->call(StepsTableSeeder::class);
     }
 }
