@@ -11,5 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
+//定义关系，发布到public下（npm run dev）
+//会从node_modules中获取相关组件，到public下
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
