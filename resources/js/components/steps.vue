@@ -66,13 +66,21 @@
                 newStep: '',
                 //steps是一个数组对象，里面有两个对象
                 steps:[
-                    {name: 'wenjie', completion: false},
-                    {name: 'mengna', completion: false}
+                    //保留一组空数据，展现数据结构
+                    // {name:'', completion:false}
                 ]
             }
         },
+        created(){
+            this.fetchSteps()
+        },
         //事件的方法
         methods: {
+                fetchSteps(){
+                    axios.get(window.location.href + '/steps').then((response)=>{
+                        this.steps = response.data
+                        })
+                },
                 addStep(){
                     this.steps.push({name: this.newStep, completion: false})
                     this.newStep = ''

@@ -1974,17 +1974,23 @@ __webpack_require__.r(__webpack_exports__);
     return {
       newStep: '',
       //steps是一个数组对象，里面有两个对象
-      steps: [{
-        name: 'wenjie',
-        completion: false
-      }, {
-        name: 'mengna',
-        completion: false
-      }]
+      steps: [//保留一组空数据，展现数据结构
+        // {name:'', completion:false}
+      ]
     };
+  },
+  created: function created() {
+    this.fetchSteps();
   },
   //事件的方法
   methods: {
+    fetchSteps: function fetchSteps() {
+      var _this = this;
+
+      axios.get(window.location.href + '/steps').then(function (response) {
+        _this.steps = response.data;
+      });
+    },
     addStep: function addStep() {
       this.steps.push({
         name: this.newStep,
