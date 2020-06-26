@@ -19,7 +19,7 @@ class TasksController extends Controller
 
 
     /**
-     * Display a listing of the resource.
+     * 列出该Task下的所有Step.
      *
      * @return \Illuminate\Http\Response
      */

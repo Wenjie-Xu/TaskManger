@@ -1970,6 +1970,8 @@ __webpack_require__.r(__webpack_exports__);
   //数据对象，格式类似python的dict
   //数据渲染的方式
   //在vue组件中写成方法，方便多个实例调用
+  props: [//接收从blade中传递过来的参数
+  'route'],
   data: function data() {
     return {
       newStep: '',
@@ -1987,8 +1989,9 @@ __webpack_require__.r(__webpack_exports__);
     fetchSteps: function fetchSteps() {
       var _this = this;
 
-      axios.get(window.location.href + '/steps').then(function (response) {
-        _this.steps = response.data;
+      axios.get(this.route).then(function (response) {
+        _this.steps = response.data.steps;
+      })["catch"](function (error_response) {//异常处理的脚本
       });
     },
     addStep: function addStep() {

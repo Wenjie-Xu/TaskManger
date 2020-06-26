@@ -5,7 +5,7 @@
         <div class="row justify-content-start">
             <h2>{{ $task->name }}</h2>
         </div>
-        <steps></steps>
+        <steps route="{{ route("tasks.steps.index",$task->id) }}"></steps>
     </div>
 @endsection
 @section('customJS')

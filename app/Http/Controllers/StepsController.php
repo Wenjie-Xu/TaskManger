@@ -15,7 +15,11 @@ class StepsController extends Controller
      */
     public function index(Task $task)
     {
-        return $task->steps;
+        // return $task->steps;
+        //用于返回多个数据，K-V的形式
+        return response()->json([
+            'steps'=> $task->steps
+        ], 200);
     }
 
     /**

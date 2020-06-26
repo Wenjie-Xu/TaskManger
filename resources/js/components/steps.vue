@@ -61,6 +61,10 @@
         //数据对象，格式类似python的dict
         //数据渲染的方式
         //在vue组件中写成方法，方便多个实例调用
+        props:[
+            //接收从blade中传递过来的参数
+            'route'
+        ],
         data(){
             return {
                 newStep: '',
@@ -77,8 +81,11 @@
         //事件的方法
         methods: {
                 fetchSteps(){
-                    axios.get(window.location.href + '/steps').then((response)=>{
-                        this.steps = response.data
+                    axios.get(this.route).then((response)=>{
+                        // 这里的data就是controller返回的值
+                        this.steps = response.data.steps
+                        }).catch((error_response)=>{
+                            //异常处理的脚本
                         })
                 },
                 addStep(){
