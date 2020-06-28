@@ -1990,24 +1990,39 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get(this.route).then(function (response) {
+        // 这里的data就是controller返回的值
         _this.steps = response.data.steps;
       })["catch"](function (error_response) {//异常处理的脚本
       });
     },
     addStep: function addStep() {
-      this.steps.push({
-        name: this.newStep,
-        completion: false
+      var _this2 = this;
+
+      // 提交一个对象
+      axios.post(this.route, {
+        name: this.newStep
+      }).then(function (response) {
+        // 接受一个对象，将对象放入steps
+        _this2.steps.push(response.data.step);
+
+        _this2.newStep = '';
       });
-      this.newStep = '';
     },
     toggle: function toggle(step) {
       step.completion = !step.completion;
     },
     remove: function remove(step) {
-      var i = this.steps.indexOf(step); //获取下标
+      var _this3 = this;
 
-      this.steps.splice(i, 1); //移除
+      axios["delete"]("".concat(this.route, "/").concat(step.id)).then(function (response) {
+        var i = _this3.steps.indexOf(step); //获取下标
+
+
+        _this3.steps.splice(i, 1); //移除
+
+
+        console.log(response); // alert(response.data.msg)
+      });
     },
     edit: function edit(step) {
       this.remove(step); //移除

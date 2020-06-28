@@ -38,9 +38,13 @@ class StepsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Task $task, Request $request)
     {
-        //
+        //直接通过response返回可以减少页面的刷新
+        return response()->json([
+            //通过关系创建对象，请求就一个参数，赋值给name
+            'step'=>$task->steps()->create($request->only('name'))
+        ],201);
     }
 
     /**
@@ -83,8 +87,11 @@ class StepsController extends Controller
      * @param  \App\Step  $step
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Step $step)
+    public function destroy(Task $task,Step $step)
     {
-        //
+        $step->delete();
+        return response()->json([
+            'msg' => '删除成功'
+        ],204);
     }
 }

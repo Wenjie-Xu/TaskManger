@@ -89,15 +89,23 @@
                         })
                 },
                 addStep(){
-                    this.steps.push({name: this.newStep, completion: false})
-                    this.newStep = ''
+                    // 提交一个对象
+                    axios.post(this.route,{name: this.newStep}).then((response)=>{
+                        // 接受一个对象，将对象放入steps
+                        this.steps.push(response.data.step)
+                        this.newStep = ''
+                    })
                 },
                 toggle(step){
                     step.completion = ! step.completion
                 },
                 remove(step){
-                    let i = this.steps.indexOf(step)//获取下标
-                    this.steps.splice(i, 1)//移除
+                    axios.delete(`${this.route}/${step.id}`).then((response)=>{
+                        let i = this.steps.indexOf(step)//获取下标
+                        this.steps.splice(i, 1)//移除
+                        console.log(response)
+                        // alert(response.data.msg)
+                    })
                 },
                 edit(step){
                     this.remove(step)//移除
