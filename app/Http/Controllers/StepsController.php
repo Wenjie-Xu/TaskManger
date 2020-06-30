@@ -43,7 +43,7 @@ class StepsController extends Controller
         //直接通过response返回可以减少页面的刷新
         return response()->json([
             //通过关系创建对象，请求就一个参数，赋值给name
-            'step'=>$task->steps()->create($request->only('name'))
+            'step'=>$task->steps()->create($request->only('name'))->refresh()
         ],201);
     }
 
