@@ -49,6 +49,11 @@ Route::resource('tasks', 'TasksController');
 //定义task完成状态的路由
 Route::post('/tasks/check/{id}','TasksController@check')->name('tasks.check');
 
+//自定义全部完成的路由
+Route::patch('/tasks/{task}/steps/complete','StepsController@complete');
+//自定义一键清除已完成的路由
+Route::delete('/tasks/{task}/steps/clear','StepsController@clear');
+
 //从属关系的路由结构
 //资源路由这样的写法将获得:tasks/1/steps/1，这样的路由结构
 Route::resource('tasks.steps', 'StepsController');

@@ -2009,7 +2009,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     toggle: function toggle(step) {
-      step.completion = !step.completion;
+      axios.patch("".concat(this.route, "/").concat(step.id), {
+        completion: !step.completion
+      }).then(function (response) {
+        step.completion = !step.completion;
+      });
     },
     remove: function remove(step) {
       var _this3 = this;
@@ -2020,8 +2024,6 @@ __webpack_require__.r(__webpack_exports__);
 
         _this3.steps.splice(i, 1); //移除
 
-
-        console.log(response); // alert(response.data.msg)
       });
     },
     edit: function edit(step) {
@@ -2033,12 +2035,22 @@ __webpack_require__.r(__webpack_exports__);
       // $('input').focus()
     },
     allProcessed: function allProcessed() {
-      this.inProcessed.forEach(function (step) {
-        step.completion = true;
+      var _this4 = this;
+
+      axios.patch("".concat(this.route, "/complete"), {
+        completion: 1
+      }).then(function (response) {
+        _this4.inProcessed.forEach(function (step) {
+          step.completion = true;
+        });
       });
     },
     allRemove: function allRemove() {
-      this.steps = this.inProcessed; //让原始属性等于未完成计算属性，相当于清空了已完成
+      var _this5 = this;
+
+      axios["delete"]("".concat(this.route, "/clear")).then(function (response) {
+        _this5.steps = _this5.inProcessed; //让原始属性等于未完成计算属性，相当于清空了已完成
+      });
     }
   },
   //计算属性，本质是属性

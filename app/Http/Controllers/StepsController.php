@@ -76,9 +76,10 @@ class StepsController extends Controller
      * @param  \App\Step  $step
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Step $step)
+    public function update(Request $request, Task $task,Step $step)
     {
-        //
+        // 更新步骤的状态，路由参数一定要全
+        $step->update($request->only('completion'));
     }
 
     /**
@@ -93,5 +94,16 @@ class StepsController extends Controller
         return response()->json([
             'msg' => '删除成功'
         ],204);
+    }
+
+    public function complete(Request $request, Task $task){
+        $task->steps()->where('completion',0)->update([
+            'completion' => $request->completion
+        ]);
+    }
+
+    public function clear(Task $task){
+        // 删除所有已完成步骤
+        $task->steps()->where('completion',1)->delete();
     }
 }

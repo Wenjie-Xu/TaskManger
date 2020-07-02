@@ -97,14 +97,15 @@
                     })
                 },
                 toggle(step){
-                    step.completion = ! step.completion
+                    axios.patch(`${this.route}/${step.id}`,{completion: !step.completion})
+                        .then((response)=>{
+                            step.completion = ! step.completion
+                        })      
                 },
                 remove(step){
                     axios.delete(`${this.route}/${step.id}`).then((response)=>{
                         let i = this.steps.indexOf(step)//获取下标
                         this.steps.splice(i, 1)//移除
-                        console.log(response)
-                        // alert(response.data.msg)
                     })
                 },
                 edit(step){
@@ -114,12 +115,17 @@
                     // $('input').focus()
                 },
                 allProcessed(){
-                    this.inProcessed.forEach((step)=>{
-                        step.completion=true
+                    axios.patch(`${this.route}/complete`,{completion:1})
+                        .then((response)=>{
+                            this.inProcessed.forEach((step)=>{
+                                step.completion=true
+                            })
                     })
                 },
                 allRemove(){
-                    this.steps = this.inProcessed //让原始属性等于未完成计算属性，相当于清空了已完成
+                    axios.delete(`${this.route}/clear`).then((response)=>{
+                        this.steps = this.inProcessed //让原始属性等于未完成计算属性，相当于清空了已完成
+                    })          
                 }
             },
         //计算属性，本质是属性
