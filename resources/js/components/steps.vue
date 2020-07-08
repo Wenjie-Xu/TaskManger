@@ -20,17 +20,9 @@
                     </ul>
                 </div>
             </div>
+            <!-- 监听添加事件，接受参数 -->
+            <addStep v-bind:route="route" v-on:addStep="sync"></addStep>
 
-            <div class="card">
-                <div class="card-header">
-                    <div class="form-group">
-                        <label>请输入待完成的步骤：</label>
-                        <!-- 表单与数据进行响应式双向绑定，互相影响 -->
-                        <input type="text" class="form-control" ref="addStep" v-model="newStep" v-on:keyup.enter="addStep">
-                        <button v-if="newStep" class="btn btn-success btn-sm float-right mt-3" v-on:click="addStep">添加步骤</button>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="col-4">
@@ -56,6 +48,11 @@
 </template>
 
 <script>
+// 引入addStep
+import addStep from './addStep'
+// 引入用于沟通的Hub
+import {Hub} from '../vue-bus'
+
 //默认写法
     export default{
         //数据对象，格式类似python的dict
@@ -65,10 +62,13 @@
             //接收从blade中传递过来的参数
             'route'
         ],
+        // 注册引入的组件，如果不在模板中使用可以不注册
+        components:{
+            'addStep':addStep
+        },
         data(){
             return {
-                newStep: '',
-                //steps是一个数组对象，里面有两个对象
+                //steps是一个数组对象，里面有两个对象':''
                 steps:[
                     //保留一组空数据，展现数据结构
                     // {name:'', completion:false}
@@ -88,13 +88,10 @@
                             //异常处理的脚本
                         })
                 },
-                addStep(){
-                    // 提交一个对象
-                    axios.post(this.route,{name: this.newStep}).then((response)=>{
-                        // 接受一个对象，将对象放入steps
-                        this.steps.push(response.data.step)
-                        this.newStep = ''
-                    })
+                // 接受添加事件的子组件的方法
+                sync(step){
+                    // 将接受的对象push到列表中
+                    this.steps.push(step)
                 },
                 toggle(step){
                     axios.patch(`${this.route}/${step.id}`,{completion: !step.completion})
@@ -110,9 +107,7 @@
                 },
                 edit(step){
                     this.remove(step)//移除
-                    this.newStep=step.name//放入输入框
-                    this.$refs.addStep.focus()//DOM元素聚焦
-                    // $('input').focus()
+                    Hub.$emit('edit',step)//将数据传递到其他组件中处理
                 },
                 allProcessed(){
                     axios.patch(`${this.route}/complete`,{completion:1})
